@@ -89,7 +89,7 @@
               
             }
 
-            this.$router.push('home')
+            this.$router.push('/')
           }
         });
       },
@@ -99,7 +99,7 @@
 
 <style lang="scss" scoped>
   .login {
-    background-image: url("~@/assets/images/login.jpg");
+    background-image: url("~@/assets/images/login-background.jpg");
     height: 100%;
     width: 100%;
     overflow: hidden;

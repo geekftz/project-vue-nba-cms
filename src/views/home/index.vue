@@ -1,109 +1,48 @@
 <template>
   <div class="home">
-     <a-layout id="components-layout-demo-top-side-2">
-      <a-layout-header class="header">
-        <div class="logo" />
-        <!-- <a-menu
-          theme="dark"
-          mode="horizontal"
-          :defaultSelectedKeys="['2']"
-          :style="{ lineHeight: '64px' }"
-        >
-          <a-menu-item key="1">nav 1</a-menu-item>
-          <a-menu-item key="2">nav 2</a-menu-item>
-          <a-menu-item key="3">nav 3</a-menu-item>
-        </a-menu> -->
-      </a-layout-header>
-      <a-layout>
-        <a-layout-sider width="200" style="background: #fff">
-          <a-menu
-            mode="inline"
-            :style="{ height: '100%', borderRight: 0 }"
-          >
-            <!-- :defaultSelectedKeys="['1']"
-            :defaultOpenKeys="['sub1']" -->
-            <a-sub-menu key="sub1">
-              <span slot="title"><a-icon type="user" />NBA</span>
-              <a-menu-item key="1">球队</a-menu-item>
-              <a-menu-item key="2">球员</a-menu-item>
-            </a-sub-menu>
-            <a-sub-menu key="sub2">
-              <span slot="title"><a-icon type="laptop" />历史</span>
-              <a-menu-item key="5">ALL STAR</a-menu-item>
-              <a-menu-item key="6">名人堂</a-menu-item>
-            </a-sub-menu>
-            <a-sub-menu key="sub3">
-              <span slot="title"><a-icon type="laptop" />装备</span>
-              <a-menu-item key="7">球鞋</a-menu-item>
-              <a-menu-item key="8">球服</a-menu-item>
-            </a-sub-menu>
-          </a-menu>
-        </a-layout-sider>
-        <a-layout style="padding: 0 24px 24px">
-          <a-breadcrumb style="margin: 16px 0">
-            <a-breadcrumb-item>首页</a-breadcrumb-item>
-            <!-- <a-breadcrumb-item>List</a-breadcrumb-item>
-            <a-breadcrumb-item>App</a-breadcrumb-item> -->
-          </a-breadcrumb>
-          <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
-            Content
-          </a-layout-content>
-        </a-layout>
-      </a-layout>
-    </a-layout>
+    <div class="ta-ct fs-24">
+      Welcome to my NBA world!
+    </div>
+
+    <div class="section fs-16">
+      Let me introduce this as a background management system, and why should I do this?
+
+    </div>
+
+    <div class="section fs-16">
+      1. First of all, I am an avid basketball powder. Basketball is like my life, so I don’t know what other
+      motivations will make me do this.
+    </div>
+
+    <div class="section fs-16">
+      2. Secondly, I want to improve my technical level. With such a clear direction, I can expand to all aspects of
+      basketball. In the process, I hope I can make it what I want.
+    </div>
+
+    <div class="section fs-16">
+      3. Finally, I will introduce the history of the NBA teams, the player's information from several modules, the
+      All-Star and Hall of Fame players in NBA history, as well as basketball shoes and basketball uniforms, etc.
+    </div>
+
+    <div class="section fs-16">
+      I hope everyone can like my project. If you are interested, you can join me and let me continue to learn and work
+      hard to achieve the great goal of the whole stack engineer.
+    </div>
   </div>
 </template>
 
 <script>
-
-  import {
-    Layout,
-    Menu,
-    Breadcrumb,
-    Icon
-  } from "ant-design-vue";
-
-  const { Header: ALayoutHeader, Sider: ALayoutSider, Content: ALayoutContent } = Layout
-  const { Item: ABreadcrumbItem } = Breadcrumb
-  const { Item: AMenuItem, SubMenu: ASubMenu } = Menu
-
   export default {
-    name: 'home',
-    data() {
-      return {
-        collapsed: false,
-      }
-    },
-
-    components: {
-      ALayout: Layout,
-      ALayoutHeader,
-      ALayoutSider,
-      ALayoutContent,
-      AMenu: Menu,
-      ASubMenu,
-      AMenuItem,
-      ABreadcrumb: Breadcrumb,
-      ABreadcrumbItem,
-      AIcon: Icon
-    }
+    name: 'home'
   }
+
 </script>
 
 <style lang="scss" scoped>
   .home {
-    height: 100%;
-
-    #components-layout-demo-top-side-2 {
-      height: 100%;
-
-      .logo {
-        width: 120px;
-        height: 31px;
-        background: rgba(255,255,255,.2);
-        margin: 16px 28px 16px 0;
-        float: left;
-      }
+    .section {
+      // height: 30px;
+      line-height: 30px;
     }
   }
 </style>
