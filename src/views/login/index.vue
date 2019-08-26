@@ -3,7 +3,7 @@
     <a-form id="components-form-demo-normal-login" :form="loginForm" class="login-form" @submit="login">
       <a-form-item>
         <a-input v-decorator="[
-            'name',
+            'username',
             { rules: [{ required: true, message: '请输入用户名' }] }
           ]" placeholder="用户名">
           <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
@@ -184,10 +184,10 @@
 
     mounted() {
       if (localStorage.getItem("userSetting")) {
-        let { name, password, remember } = JSON.parse(localStorage.getItem("userSetting")); 
+        let { username, password, remember } = JSON.parse(localStorage.getItem("userSetting")); 
 
         this.loginForm.setFieldsValue({
-          name,
+          username,
           password,
           remember
         });
@@ -208,17 +208,12 @@
         this.loginForm.validateFields((err, values) => {
           if (!err) {
             let data = (({
-              name,
+              username,
               password
             }) => ({
-              name,
+              username,
               password
             }))(values)
-
-            this.$store.dispatch('login', data).then(res => {
-              console.log(res);
-              // this.$router.push('/')
-            })
 
             // 是否记住
             if (values.remember) {
@@ -226,6 +221,20 @@
             } else {
               localStorage.removeItem("userSetting");
             }
+
+            this.$store.dispatch('login', data).then(res => {
+              const { data: {
+                code, msg, user
+              } } = res
+
+              if (code === 200) {
+                this.$message.success(msg)
+              } else {
+                this.$message.error(msg)
+              }
+
+              this.$router.push('/')
+            })
           }
         });
       },
@@ -277,7 +286,7 @@
 
 <style lang="scss" scoped>
   .login {
-    // background-image: url("~@/assets/images/login-background.jpg");
+    background-image: url("~@/assets/images/login-background.jpg");
     height: 100%;
     width: 100%;
     overflow: hidden;

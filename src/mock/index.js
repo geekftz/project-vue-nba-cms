@@ -40,7 +40,7 @@ export default {
           });
           // 如果有那么一个人
           if (hasUser) {
-            resolve([ 200, {code: 200, msg: '登录成功',user} ]);
+            resolve([ 200, {code: 200, msg: '登录成功', user} ]);
           } else {  // 如果没有这么一个人
             resolve([ 200, {code: 500, msg: '账号错误' }])
           }
