@@ -6,7 +6,6 @@
 
     <div class="section fs-16">
       Let me introduce this as a background management system, and why should I do this?
-
     </div>
 
     <div class="section fs-16">
@@ -41,7 +40,6 @@
 <style lang="scss" scoped>
   .home {
     .section {
-      // height: 30px;
       line-height: 30px;
     }
   }
