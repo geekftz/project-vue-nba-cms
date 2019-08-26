@@ -25,12 +25,9 @@
 
   import {
     Layout,
-    Breadcrumb,
-    Icon
   } from "ant-design-vue";
 
   const { Header: ALayoutHeader, Sider: ALayoutSider, Content: ALayoutContent } = Layout
-  const { Item: ABreadcrumbItem } = Breadcrumb
 
   import SiderMenu from '@/components/sidermenu/index.vue'
   import TopHeader from '@/components/topheader/index.vue'
@@ -48,9 +45,6 @@
       ALayoutSider,
       ALayoutContent,
       ALayoutHeader,
-      ABreadcrumb: Breadcrumb,
-      ABreadcrumbItem,
-      AIcon: Icon,
 
       TopHeader,
       SiderMenu
@@ -88,8 +82,8 @@
         width: 120px;
         height: 40px;
         background: url('../../assets/images/nba-logo.jpeg');
-          background-repeat: no-repeat;
-          background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
       }
 
       .open {

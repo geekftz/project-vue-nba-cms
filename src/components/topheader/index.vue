@@ -58,7 +58,6 @@
 
     methods: {
       backHome () {
-        console.log(123);
         this.$router.push({
           path: '/'
         })

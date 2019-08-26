@@ -12,6 +12,10 @@ html {
   box-sizing: border-box;
 }
 
+.df-clr {
+  color: purple;
+}
+
 #app {
   height: 100%;
 }
@@ -46,6 +50,10 @@ html {
 
 .dis-ib {
   display: inline-block;
+}
+
+.dis-no {
+  display: none;
 }
 
 .cur-pt {

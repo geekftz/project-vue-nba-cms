@@ -18,9 +18,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import Router from 'vue-router';
+import store from './store'
+import axios from 'axios'
+import Mock from './mock/index'
 
 
 Vue.use(Router)
+
+Mock.init()
 
 // 添加这下面一段代码，就可以解决报错 
 
@@ -31,22 +36,23 @@ Router.prototype.push = function push(location) {
 
 import { message, Form } from 'ant-design-vue'
 
-import '@/styles/index.scss' //全局css
+import '@/styles/base.scss' //全局css
 
 Vue.config.productionTip = false
 
+// 挂在全局变量
 Vue.prototype.$message = message
 Vue.prototype.$form = Form
-
-
+Vue.prototype.$axios = axios
 
 // router.beforeEach((to, from, next) => {
-//   // ...
-// })
-
-// ####################################
-
-new Vue({
-  router,
-  render: h => h(App),
-}).$mount('#app')
+  //   // ...
+  // })
+  
+  // ####################################
+  
+  new Vue({
+    router,
+    store,
+    render: h => h(App),
+  }).$mount('#app')
