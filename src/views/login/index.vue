@@ -109,6 +109,8 @@
 
   import FormModal from '@/components/formmodal/index.vue'
 
+  import { requestLogin } from '@/api/global.js'
+
   const residences = [{
     value: 'zhejiang',
     label: 'Zhejiang',
@@ -222,18 +224,17 @@
               localStorage.removeItem("userSetting");
             }
 
-            this.$store.dispatch('login', data).then(res => {
-              const { data: {
-                code, msg, user
+            requestLogin('/user/login', data).then(res => {
+              const { loginRes: {
+                retCode, msg
               } } = res
 
-              if (code === 200) {
+              if (retCode === 0) {
                 this.$message.success(msg)
+                this.$router.push('/')
               } else {
                 this.$message.error(msg)
               }
-
-              this.$router.push('/')
             })
           }
         });
@@ -286,7 +287,7 @@
 
 <style lang="scss" scoped>
   .login {
-    background-image: url("~@/assets/images/login-background.jpg");
+    // background-image: url("~@/assets/images/login-background.jpg");
     height: 100%;
     width: 100%;
     overflow: hidden;

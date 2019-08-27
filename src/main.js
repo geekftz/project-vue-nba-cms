@@ -20,12 +20,14 @@ import router from './router'
 import Router from 'vue-router';
 import store from './store'
 import axios from 'axios'
-import Mock from './mock/index'
+import VueAxios from 'vue-axios'
 
+// require('./mock')
+
+// import Mock from './mock/index'
+// Mock.init()
 
 Vue.use(Router)
-
-Mock.init()
 
 // 添加这下面一段代码，就可以解决报错 
 
@@ -43,7 +45,6 @@ Vue.config.productionTip = false
 // 挂在全局变量
 Vue.prototype.$message = message
 Vue.prototype.$form = Form
-Vue.prototype.$axios = axios
 
 // router.beforeEach((to, from, next) => {
   //   // ...
