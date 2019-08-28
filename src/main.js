@@ -19,8 +19,6 @@ import App from './App.vue'
 import router from './router'
 import Router from 'vue-router';
 import store from './store'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
 
 // require('./mock')
 
