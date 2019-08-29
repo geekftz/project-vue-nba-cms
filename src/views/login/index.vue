@@ -2,7 +2,8 @@
   <div class="login">
     <a-form id="components-form-demo-normal-login" :form="loginForm" class="login-form" @submit="login">
       <a-form-item>
-        <a-input v-decorator="[
+        <input type="password" style="display: none;" />
+        <a-input ref="loginFormUsername" v-decorator="[
             'username',
             { rules: [{ required: true, message: '请输入用户名' }] }
           ]" placeholder="用户名">
@@ -16,14 +17,14 @@
           ]" type="password" placeholder="密码">
           <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
         </a-input>
-        <input type="password" style="position: absolute;z-index: -999">
+        <input type="password" style="position:absolute; z-index:-999; left: 0; opacity: 0.01"/>
       </a-form-item>
       <a-form-item>
         <a-checkbox v-decorator="[
             'remember',
             {
               valuePropName: 'checked',
-              initialValue: true,
+              initialValue: false,
             }
           ]">
           <span class="df-clr">
@@ -111,6 +112,8 @@
 
   import { requestLogin } from '@/api/global.js'
 
+  import { mapMutations } from 'vuex'
+
   const residences = [{
     value: 'zhejiang',
     label: 'Zhejiang',
@@ -194,9 +197,16 @@
           remember
         });
       }
+
+      this.$refs.loginFormUsername.focus()
     },
 
     methods: {
+      ...mapMutations([
+        'SAVE_USERTOKEN', // 将 `this.SAVE_USERTOKEN(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
+        'CHANGE_SPINNING'
+      ]),
+
       openRegisterModal() {
         this.visible = true
       },
@@ -224,16 +234,17 @@
               localStorage.removeItem("userSetting");
             }
 
-            requestLogin('/user/login', data).then(res => {
-              const { loginRes: {
-                retCode, msg
-              } } = res
+            this.CHANGE_SPINNING(true)
 
-              if (retCode === 0) {
-                this.$message.success(msg)
+            requestLogin(data).then(res => {
+              this.CHANGE_SPINNING(false)
+
+              // console.log('%c⧭', 'color: #00bf00', res)
+              if (res.retCode === 0) {
+                localStorage.setItem('userToken', res.userToken)
+                this.SAVE_USERTOKEN(res.userToken)
+
                 this.$router.push('/')
-              } else {
-                this.$message.error(msg)
               }
             })
           }
@@ -244,13 +255,6 @@
         this.registerForm.validateFieldsAndScroll((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
-
-            // this.confirmLoading = true;
-
-            // setTimeout(() => {
-            //   this.visible = false;
-            //   this.confirmLoading = false;
-            // }, 1000);
           }
         });
       },
@@ -287,6 +291,7 @@
 
 <style lang="scss" scoped>
   .login {
+    position: relative;
     // background-image: url("~@/assets/images/login-background.jpg");
     height: 100%;
     width: 100%;

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="ta-ct fs-24">
+    <!-- <div class="ta-ct fs-24">
       Welcome to my NBA world!
     </div>
 
@@ -26,13 +26,49 @@
     <div class="section fs-16">
       I hope everyone can like my project. If you are interested, you can join me and let me continue to learn and work
       hard to achieve the great goal of the whole stack engineer.
-    </div>
+    </div> -->
+
+    <a-row>
+      <a-col :span="6">col-6</a-col>
+      <a-col :span="12">col-12</a-col>
+      <a-col :span="6">col-6</a-col>
+    </a-row>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
+  import {
+    Row,
+    Col
+  } from 'ant-design-vue'
+
   export default {
-    name: 'home'
+    name: 'home',
+
+    data() {
+      return {
+        
+      }
+    },
+
+    computed: mapState({
+      userToken: state => state.userToken,
+    }),
+
+    components: {
+      ARow: Row,
+      ACol: Col
+    },
+
+    mounted() {
+      // console.log(this.userToken);
+    },
+
+    methods: {
+      
+    },
   }
 
 </script>

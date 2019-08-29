@@ -44,9 +44,20 @@ Vue.config.productionTip = false
 Vue.prototype.$message = message
 Vue.prototype.$form = Form
 
-// router.beforeEach((to, from, next) => {
-//     // ...
-// })
+// 路由导航
+router.beforeEach((to, from, next) => {
+  if (localStorage.getItem('userToken')) { // 如果已经登录的话
+    next();
+  } else {
+    if (to.path === '/login') { // 如果是登录页面的话，直接next()
+      next();
+    } else { // 否则 跳转到登录页面
+      next({
+        path: '/login'
+      });
+    }
+  }
+})
   
   // ####################################
   
