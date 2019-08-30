@@ -81,7 +81,7 @@
         margin: 16px auto;
         width: 120px;
         height: 40px;
-        background: url('../../assets/images/nba-logo.jpeg');
+        // background: url('../../assets/images/nba-logo.jpeg');
         background-repeat: no-repeat;
         background-size: 100% 100%;
       }

@@ -96,7 +96,7 @@
       return {
         userName: JSON.parse(localStorage.getItem('userSetting')).username,
 
-        aboutItVisible: true,
+        aboutItVisible: false,
 
         bodyStyle: {
           height: '400px',

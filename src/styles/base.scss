@@ -1,3 +1,5 @@
+// 全局样式
+
 * {
   padding: 0;
   margin: 0;
@@ -12,13 +14,41 @@ html {
   box-sizing: border-box;
 }
 
+#app {
+  height: 100%;
+}
+// 全局滚动条
+
+::-webkit-scrollbar-track-piece {
+	background-color:#f8f8f8;
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+}
+/*滚动条的宽度*/
+::-webkit-scrollbar {
+	width:9px;
+}
+/*滚动条的设置*/
+::-webkit-scrollbar-thumb {
+	background-color:#dddddd;
+	background-clip:padding-box;
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+}
+/*滚动条鼠标移上去*/
+::-webkit-scrollbar-thumb:hover {
+	background-color:#bbb;
+}
+
+// 基础颜色
+
 .df-clr {
   color: purple;
 }
 
-#app {
-  height: 100%;
-}
+// 全局字体
 
 .fs-12 {
   font-size: 12px;
@@ -44,6 +74,8 @@ html {
   font-size: 24px;
 }
 
+// 常用布局
+
 .ta-ct {
   text-align: center;
 }
@@ -56,14 +88,15 @@ html {
   display: none;
 }
 
-.cur-pt {
-  cursor: pointer;
-}
-
 .fl-r {
   float: right;
 }
 
 .fl-l {
   float: left;
+}
+
+// 鼠标触发样式
+.cur-pt {
+  cursor: pointer;
 }
