@@ -50,6 +50,13 @@
       SiderMenu
     },
 
+    mounted() {
+      this.$on('dispatch', (obj) => {
+        console.log('i get dispatch');
+        console.log(obj.a);
+      })
+    },
+
     methods: {
       reverseCollapsed () {
         this.collapsed = !this.collapsed
