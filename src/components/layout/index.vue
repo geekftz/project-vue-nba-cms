@@ -52,8 +52,8 @@
 
     mounted() {
       this.$on('dispatch', (obj) => {
-        console.log('i get dispatch');
-        console.log(obj.a);
+        // console.log('i get dispatch');
+        // console.log(obj);
       })
     },
 

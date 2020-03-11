@@ -10,6 +10,7 @@
     <button @click="test">test broadcast</button>
 
     <!-- {{ message | capitalize }} -->
+
   </div>
 </template>
 
@@ -51,7 +52,6 @@
     methods: {
 
       test() {
-        t
       }
     },
   }

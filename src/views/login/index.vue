@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <Test></Test>
     <a-form id="components-form-demo-normal-login" :form="loginForm" class="login-form" @submit="login">
       <a-form-item>
         <input type="password" style="display: none;" />
@@ -109,6 +110,7 @@
   } = Form;
 
   import FormModal from '@/components/formmodal/index.vue'
+  import Test from '@/components/test/index.vue'
 
   import { requestLogin } from '@/api/global.js'
 
@@ -179,7 +181,8 @@
       AAlert: Alert,
 
       FormModal,
-      ATooltip: Tooltip
+      ATooltip: Tooltip,
+      Test
     },
 
     beforeCreate() {
