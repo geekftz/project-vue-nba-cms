@@ -20,6 +20,10 @@ import router from './router'
 import Router from 'vue-router';
 import store from './store'
 
+import AsyncComputed from 'vue-async-computed'
+
+Vue.use(AsyncComputed)
+
 // require('./mock')
 
 // import Mock from './mock/index'
