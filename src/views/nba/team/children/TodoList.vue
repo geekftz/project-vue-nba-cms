@@ -9,26 +9,26 @@
 </template>
 
 <script>
-    export default {
-        name: 'todo-list',
+export default {
+    name: 'todo-list',
 
-        data() {
-            return {
+    data() {
+        return {
                 
-            }
-        },
+        }
+    },
 
-        props: {
-            item: {
-                type:Array,
-                default: () => []
-            }
-        },
+    props: {
+        item: {
+            type:Array,
+            default: () => []
+        }
+    },
 
-        mounted() {
+    mounted() {
             
-        },
-    }
+    },
+}
 </script>
 
 <style lang="scss" scoped>

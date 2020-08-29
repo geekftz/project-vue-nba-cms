@@ -5,9 +5,9 @@
 </template>
 
 <script>
-    export default {
-        name: 'halloffame'
-    }
+export default {
+    name: 'halloffame'
+}
 </script>
 
 <style lang="scss" scoped>

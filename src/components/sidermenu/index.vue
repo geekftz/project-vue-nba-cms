@@ -31,58 +31,60 @@
 </template>
 
 <script>
-  import {
-    Layout,
+import {
     Menu,
     Icon
-  } from "ant-design-vue";
+} from "ant-design-vue";
 
-  const {
+const {
     Item: AMenuItem,
     SubMenu: ASubMenu
-  } = Menu
+} = Menu
 
-  export default {
+export default {
     name: 'sider-menu',
 
     data() {
-      return {
-        openKeys: []
-      }
+        return {
+            openKeys: []
+        }
     },
 
     components: {
-      AMenu: Menu,
-      ASubMenu,
-      AMenuItem,
-      AIcon: Icon,
+        AMenu: Menu,
+        ASubMenu,
+        AMenuItem,
+        AIcon: Icon,
     },
 
     watch: {
-      $route(to, from) {
+        /**
+			 * params to, from
+			 */
+        $route(to) {
         // 执行ajax请求，但只希望在进入时请求，离开时不希望进行请求。
-        console.log(to);
-        if (to.path === '/home') {
-          this.openKeys = []
+            console.log(to);
+            if (to.path === '/home') {
+                this.openKeys = []
+            }
         }
-      }
     },
 
     methods: {
-      handleClick(e) {
-        const {
-          keyPath
-        } = e
-        const path = '/' + keyPath.reverse().join('\/')
+        handleClick(e) {
+            const {
+                keyPath
+            } = e
+            const path = '/' + keyPath.reverse().join('/')
 
-        console.log(path);
+            console.log(path);
 
-        this.$router.push({
-          path
-        })
-      }
+            this.$router.push({
+                path
+            })
+        }
     },
-  }
+}
 
 </script>
 

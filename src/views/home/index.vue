@@ -18,41 +18,41 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
-  import {
+import {
     Row,
     Col,
     Carousel
-  } from 'ant-design-vue'
+} from 'ant-design-vue'
 
-  export default {
+export default {
     name: 'home',
 
     data() {
-      return {
+        return {
         
-      }
+        }
     },
 
     computed: mapState({
-      userToken: state => state.userToken,
+        userToken: state => state.userToken,
     }),
 
     components: {
-      ARow: Row,
-      ACol: Col,
-      ACarousel: Carousel
+        ARow: Row,
+        ACol: Col,
+        ACarousel: Carousel
     },
 
     mounted() {
-      // console.log(this.userToken);
+        // console.log(this.userToken);
     },
 
     methods: {
       
     },
-  }
+}
 
 </script>
 

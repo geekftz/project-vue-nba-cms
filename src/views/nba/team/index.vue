@@ -15,22 +15,22 @@
 </template>
 
 <script>
-  import TodoList from './children/TodoList'
+import TodoList from './children/TodoList'
 
-  export default {
+export default {
     name: 'team',
 
     data() {
-      return {
-        treeArr: [
-          {
-            arr: [1, 2, 3],
-            flag: true
-          }
-        ],
+        return {
+            treeArr: [
+                {
+                    arr: [1, 2, 3],
+                    flag: true
+                }
+            ],
 
         // message: 'haha'
-      }
+        }
     },
 
     // filters: {
@@ -42,19 +42,19 @@
     // },
 
     components: {
-      TodoList
+        TodoList
     },
 
     mounted() {
-      // this.broadcast('todo-list', 'fuck', '')
+        // this.broadcast('todo-list', 'fuck', '')
     },
 
     methods: {
 
-      test() {
-      }
+        test() {
+        }
     },
-  }
+}
 </script>
 
 <style lang="scss" scoped>

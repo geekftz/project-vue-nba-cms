@@ -23,46 +23,46 @@
 
 <script>
 
-  import {
+import {
     Layout,
-  } from "ant-design-vue";
+} from "ant-design-vue";
 
-  const { Header: ALayoutHeader, Sider: ALayoutSider, Content: ALayoutContent } = Layout
+const { Header: ALayoutHeader, Sider: ALayoutSider, Content: ALayoutContent } = Layout
 
-  import SiderMenu from '@/components/sidermenu/index.vue'
-  import TopHeader from '@/components/topheader/index.vue'
+import SiderMenu from '@/components/sidermenu/index.vue'
+import TopHeader from '@/components/topheader/index.vue'
 
-  export default {
+export default {
     name: 'home',
     data() {
-      return {
-        collapsed: false,
-      }
+        return {
+            collapsed: false,
+        }
     },
 
     components: {
-      ALayout: Layout,
-      ALayoutSider,
-      ALayoutContent,
-      ALayoutHeader,
+        ALayout: Layout,
+        ALayoutSider,
+        ALayoutContent,
+        ALayoutHeader,
 
-      TopHeader,
-      SiderMenu
+        TopHeader,
+        SiderMenu
     },
 
     mounted() {
-      this.$on('dispatch', (obj) => {
+        this.$on('dispatch', obj => {
         // console.log('i get dispatch');
-        // console.log(obj);
-      })
+            console.log(obj);
+        })
     },
 
     methods: {
-      reverseCollapsed () {
-        this.collapsed = !this.collapsed
-      }
+        reverseCollapsed () {
+            this.collapsed = !this.collapsed
+        }
     }
-  }
+}
 </script>
 
 <style lang="scss" scoped>

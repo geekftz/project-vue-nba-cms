@@ -1,6 +1,5 @@
 <template>
   <div class="login">
-    <Test></Test>
     <a-form id="components-form-demo-normal-login" :form="loginForm" class="login-form" @submit="login">
       <a-form-item>
         <input type="password" style="display: none;" />
@@ -95,7 +94,7 @@
 </template>
 
 <script>
-  import {
+import {
     Button,
     Form,
     Input,
@@ -103,192 +102,188 @@
     Checkbox,
     Alert,
     Tooltip
-  } from "ant-design-vue";
+} from "ant-design-vue";
 
-  const {
+const {
     Item: AFormItem
-  } = Form;
+} = Form;
 
-  import FormModal from '@/components/formmodal/index.vue'
-  import Test from '@/components/test/index.vue'
+import FormModal from '@/components/formmodal/index.vue'
 
-  import { requestLogin } from '@/api/global.js'
+import { requestLogin } from '@/api/global.js'
 
-  import { mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 
-  const residences = [{
+const residences = [{
     value: 'zhejiang',
     label: 'Zhejiang',
     children: [{
-      value: 'hangzhou',
-      label: 'Hangzhou',
-      children: [{
-        value: 'xihu',
-        label: 'West Lake',
-      }],
+        value: 'hangzhou',
+        label: 'Hangzhou',
+        children: [{
+            value: 'xihu',
+            label: 'West Lake',
+        }],
     }],
-  }, {
+}, {
     value: 'jiangsu',
     label: 'Jiangsu',
     children: [{
-      value: 'nanjing',
-      label: 'Nanjing',
-      children: [{
-        value: 'zhonghuamen',
-        label: 'Zhong Hua Men',
-      }],
+        value: 'nanjing',
+        label: 'Nanjing',
+        children: [{
+            value: 'zhonghuamen',
+            label: 'Zhong Hua Men',
+        }],
     }],
-  }];
+}];
 
-  export default {
+export default {
     name: "login",
     data() {
-      return {
-        visible: false,
-        confirmLoading: false,
+        return {
+            visible: false,
+            confirmLoading: false,
 
-        confirmDirty: false,
-        residences,
-        autoCompleteResult: [],
-        formItemLayout: {
-          labelCol: {
-            xs: {
-              span: 24
+            confirmDirty: false,
+            residences,
+            autoCompleteResult: [],
+            formItemLayout: {
+                labelCol: {
+                    xs: {
+                        span: 24
+                    },
+                    sm: {
+                        span: 8
+                    },
+                },
+                wrapperCol: {
+                    xs: {
+                        span: 24
+                    },
+                    sm: {
+                        span: 16
+                    },
+                },
             },
-            sm: {
-              span: 8
-            },
-          },
-          wrapperCol: {
-            xs: {
-              span: 24
-            },
-            sm: {
-              span: 16
-            },
-          },
-        },
-      };
+        };
     },
 
     components: {
-      AButton: Button,
-      AForm: Form,
-      AInput: Input,
-      AIcon: Icon,
-      ACheckbox: Checkbox,
-      AFormItem,
-      AAlert: Alert,
+        AButton: Button,
+        AForm: Form,
+        AInput: Input,
+        AIcon: Icon,
+        ACheckbox: Checkbox,
+        AFormItem,
+        AAlert: Alert,
 
-      FormModal,
-      ATooltip: Tooltip,
-      Test
+        FormModal,
+        ATooltip: Tooltip
     },
 
     beforeCreate() {
-      this.loginForm = this.$form.createForm(this);
-      this.registerForm = this.$form.createForm(this);
+        this.loginForm = this.$form.createForm(this);
+        this.registerForm = this.$form.createForm(this);
     },
 
     mounted() {
-      if (localStorage.getItem("userSetting")) {
-        let { username, password, remember } = JSON.parse(localStorage.getItem("userSetting")); 
+        if (localStorage.getItem("userSetting")) {
+            let { username, password, remember } = JSON.parse(localStorage.getItem("userSetting")); 
 
-        this.loginForm.setFieldsValue({
-          username,
-          password,
-          remember
-        });
-      }
+            this.loginForm.setFieldsValue({
+                username,
+                password,
+                remember
+            });
+        }
 
-      this.$refs.loginFormUsername.focus()
+        this.$refs.loginFormUsername.focus()
     },
 
     methods: {
-      ...mapMutations([
-        'SAVE_USERTOKEN', // 将 `this.SAVE_USERTOKEN(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
-        'CHANGE_SPINNING'
-      ]),
+        ...mapMutations([
+            'SAVE_USERTOKEN', // 将 `this.SAVE_USERTOKEN(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
+            'CHANGE_SPINNING'
+        ]),
 
-      openRegisterModal() {
-        this.visible = true
-      },
+        openRegisterModal() {
+            this.visible = true
+        },
 
-      handleCancel() {
-        this.visible = false
-      },
+        handleCancel() {
+            this.visible = false
+        },
 
-      login(e) {
-        e.preventDefault();
-        this.loginForm.validateFields((err, values) => {
-          if (!err) {
-            let data = (({
-              username,
-              password
-            }) => ({
-              username,
-              password
-            }))(values)
+        login(e) {
+            e.preventDefault();
+            this.loginForm.validateFields((err, values) => {
+                if (!err) {
+                    let data = (({
+                        username,
+                        password
+                    }) => ({
+                        username,
+                        password
+                    }))(values)
 
-            // 是否记住
-            if (values.remember) {
-              localStorage.setItem("userSetting",JSON.stringify(values));
+                    // 是否记住
+                    if (values.remember) {
+                        localStorage.setItem("userSetting",JSON.stringify(values));
+                    } else {
+                        localStorage.removeItem("userSetting");
+                    }
+
+                    this.CHANGE_SPINNING(true)
+
+                    requestLogin(data).then(res => {
+                        this.CHANGE_SPINNING(false)
+
+                        // console.log('%c⧭', 'color: #00bf00', res)
+                        if (res.retCode === 0) {
+                            localStorage.setItem('userToken', res.userToken)
+                            this.SAVE_USERTOKEN(res.userToken)
+
+                            this.$router.push('/')
+                        }
+                    })
+                }
+            });
+        },
+
+        register() {
+            this.registerForm.validateFieldsAndScroll((err, values) => {
+            console.log("register -> err, values", err, values)
+            });
+        },
+
+        handleConfirmBlur(e) {
+            const value = e.target.value;
+            this.confirmDirty = this.confirmDirty || !!value;
+        },
+
+        compareToFirstPassword(rule, value, callback) {
+            const registerForm = this.registerForm;
+
+            if (value && value !== registerForm.getFieldValue('password')) {
+                callback('Two passwords that you enter is inconsistent!');
             } else {
-              localStorage.removeItem("userSetting");
+                callback();
             }
+        },
 
-            this.CHANGE_SPINNING(true)
+        validateToNextPassword(rule, value, callback) {
+            const registerForm = this.registerForm;
 
-            requestLogin(data).then(res => {
-              this.CHANGE_SPINNING(false)
-
-              // console.log('%c⧭', 'color: #00bf00', res)
-              if (res.retCode === 0) {
-                localStorage.setItem('userToken', res.userToken)
-                this.SAVE_USERTOKEN(res.userToken)
-
-                this.$router.push('/')
-              }
-            })
-          }
-        });
-      },
-
-      register() {
-        this.registerForm.validateFieldsAndScroll((err, values) => {
-          if (!err) {
-            console.log('Received values of form: ', values);
-          }
-        });
-      },
-
-      handleConfirmBlur(e) {
-        const value = e.target.value;
-        this.confirmDirty = this.confirmDirty || !!value;
-      },
-
-      compareToFirstPassword(rule, value, callback) {
-        const registerForm = this.registerForm;
-
-        if (value && value !== registerForm.getFieldValue('password')) {
-          callback('Two passwords that you enter is inconsistent!');
-        } else {
-          callback();
-        }
-      },
-
-      validateToNextPassword(rule, value, callback) {
-        const registerForm = this.registerForm;
-
-        if (value && this.confirmDirty) {
-          registerForm.validateFields(['confirm'], {
-            force: true
-          });
-        }
-        callback();
-      },
+            if (value && this.confirmDirty) {
+                registerForm.validateFields(['confirm'], {
+                    force: true
+                });
+            }
+            callback();
+        },
     }
-  };
+};
 
 </script>
 

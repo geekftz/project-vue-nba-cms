@@ -5,18 +5,18 @@
 </template>
 
 <script>
-  export default {
+export default {
     name: 'error-404',
     data() {
-      return {
-        data() {
-          return {
+        return {
+            data() {
+                return {
             
-          }
-        },
-      }
+                }
+            },
+        }
     },
-  }
+}
 </script>
 
 <style lang="scss" scoped>

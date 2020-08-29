@@ -13,50 +13,50 @@
 </template>
 
 <script>
-  import {
+import {
     Modal
-  } from "ant-design-vue";
+} from "ant-design-vue";
 
-  export default {
+export default {
     name: 'form-modal',
 
     data() {
-      return {
+        return {
         
-      }
+        }
     },
 
     props: {
-      title: {
-        type: String,
-        default: ''
-      },
+        title: {
+            type: String,
+            default: ''
+        },
 
-      visible: {
-        type: Boolean,
-        default: ''
-      },
+        visible: {
+            type: Boolean,
+            default: false
+        },
 
-      confirmLoading: {
-        type: Boolean,
-        default: false
-      }
+        confirmLoading: {
+            type: Boolean,
+            default: false
+        }
     },
 
     components: {
-      AModal: Modal
+        AModal: Modal
     },
 
     methods: {
-      handleOk () {
-        this.$emit('handleOk')
-      },
+        handleOk () {
+            this.$emit('handleOk')
+        },
 
-      handleCancel () {
-        this.$emit('handleCancel')
-      }
+        handleCancel () {
+            this.$emit('handleCancel')
+        }
     },
-  }
+}
 </script>
 
 <style lang="scss" scoped>

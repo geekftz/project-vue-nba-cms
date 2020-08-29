@@ -8,25 +8,25 @@
 </template>
 
 <script>
-  import {
+import {
     Spin
-  } from "ant-design-vue";
+} from "ant-design-vue";
 
-  import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
-  name: 'app',
-  data() {
-    return {}
-  },
+    name: 'app',
+    data() {
+        return {}
+    },
 
-  computed: mapState({
-    spinning: state => state.spinning,
-  }),
+    computed: mapState({
+        spinning: state => state.spinning,
+    }),
 
-  components: {
-    ASpin: Spin
-  }
+    components: {
+        ASpin: Spin
+    }
 }
 </script>
 

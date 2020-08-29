@@ -1,5 +1,5 @@
 export const menuList = [
-  {
-    name: ''
-  }
+    {
+        name: ''
+    }
 ]

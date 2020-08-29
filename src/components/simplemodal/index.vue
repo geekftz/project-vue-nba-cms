@@ -15,46 +15,46 @@
 
 <script>
   
-  import {
+import {
     Modal
-  } from 'ant-design-vue'
+} from 'ant-design-vue'
 
-  export default {
+export default {
     name: 'simple-modal',
 
     props: {
-      title: {
-        type: String,
-        default: ''
-      },
+        title: {
+            type: String,
+            default: ''
+        },
 
-      visible: {
-        type: Boolean,
-        default: false
-      },
+        visible: {
+            type: Boolean,
+            default: false
+        },
 
-      bodyStyle: {
-        type: Object,
-        default: function () {
-          return {}
+        bodyStyle: {
+            type: Object,
+            default: function () {
+                return {}
+            }
         }
-      }
     },
 
     components: {
-      AModal: Modal
+        AModal: Modal
     },
 
     methods: {
-      handleOk () {
-        this.$emit('closeSimpleModal')
-      },
+        handleOk () {
+            this.$emit('closeSimpleModal')
+        },
 
-      handleCancel () {
-        this.$emit('closeSimpleModal')
-      }
+        handleCancel () {
+            this.$emit('closeSimpleModal')
+        }
     },
-  }
+}
 </script>
 
 <style lang="scss" scoped>

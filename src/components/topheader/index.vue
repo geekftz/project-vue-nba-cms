@@ -74,101 +74,101 @@
 </template>
 
 <script>
-  import {
+import {
     Icon,
     Breadcrumb,
     Menu,
     Dropdown,
     Avatar,
     Divider
-  } from "ant-design-vue";
+} from "ant-design-vue";
 
-  const { Item: ABreadcrumbItem } = Breadcrumb
+const { Item: ABreadcrumbItem } = Breadcrumb
 
-  const { Item: AMenuItem } = Menu
+const { Item: AMenuItem } = Menu
 
-  import SimpleModal from '@/components/simplemodal/index.vue'
+import SimpleModal from '@/components/simplemodal/index.vue'
 
-  export default {
+export default {
     name: 'top-header',
 
     data() {
-      return {
-        userName: JSON.parse(localStorage.getItem('userSetting')).username,
+        return {
+            userName: JSON.parse(localStorage.getItem('userSetting')).username,
 
-        aboutItVisible: false,
+            aboutItVisible: false,
 
-        bodyStyle: {
-          height: '400px',
-          // overflow: 'hidden',
-          overflow: 'auto',
-          'overflow-y': 'scroll',
+            bodyStyle: {
+                height: '400px',
+                // overflow: 'hidden',
+                overflow: 'auto',
+                'overflow-y': 'scroll',
+            }
         }
-      }
     },
 
     props: {
-      collapsed: {
-        type: Boolean,
-        default: false
-      }
+        collapsed: {
+            type: Boolean,
+            default: false
+        }
     },
 
     computed: {
-      breadcrumbList () {
-        const { matched } = this.$route
+        breadcrumbList () {
+            const { matched } = this.$route
 
-        if (matched[0].name === '/') {
-          return []
+            if (matched[0].name === '/') {
+                return []
+            }
+
+            return matched.map( item => item.name )
         }
-
-        return matched.map( item => item.name )
-      }
     },
 
     components: {
-      AIcon: Icon,
-      ABreadcrumb: Breadcrumb,
-      ABreadcrumbItem,
-      AMenu: Menu,
-      AMenuItem,
-      ADropdown: Dropdown,
-      AAvatar: Avatar,
-      ADivider: Divider,
+        AIcon: Icon,
+        ABreadcrumb: Breadcrumb,
+        ABreadcrumbItem,
+        AMenu: Menu,
+        AMenuItem,
+        ADropdown: Dropdown,
+        AAvatar: Avatar,
+        ADivider: Divider,
 
-      SimpleModal
+        SimpleModal
     },
 
     methods: {
-      backHome () {
-        this.$router.push({
-          path: '/'
-        })
-      },
+        backHome () {
+            this.$router.push({
+                path: '/'
+            })
+        },
 
-      reverseCollapsed () {
-        this.$emit('reverseCollapsed')
-      },
+        reverseCollapsed () {
+            this.$emit('reverseCollapsed')
+        },
 
-      viewMyInfo () {
+        viewMyInfo () {
 
-      },
+        },
 
-      viewAboutIt () {
-        this.aboutItVisible = true
-      },
+        viewAboutIt () {
+            this.aboutItVisible = true
+        },
 
-      closeSimpleModal () {
-        this.aboutItVisible = false
-      },
+        closeSimpleModal () {
+            this.aboutItVisible = false
+        },
 
-      logout () {
-        localStorage.removeItem('userToken')
-        this.$message.success('退出登陆')
-        this.$router.push('/login')
-      }
+        logout () {
+            localStorage.removeItem('userToken')
+            this.$message.success('退出登陆')
+            this.$router.push('/login')
+        }
     },
-  }
+}
 
 </script>
 

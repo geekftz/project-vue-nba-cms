@@ -45,7 +45,10 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+			"indent": ["off", 2],
+			"no-console": "off"
+		},
     "parserOptions": {
       "parser": "babel-eslint"
     }
