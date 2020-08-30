@@ -2,8 +2,10 @@
 	<div class="rectangle-marker">
 		<div class="mark-wrap">
 			<img ref="backImg" :src="imgUrl" class="img-responsive" alt="响应式图像" @load="onload">
-			<div class="draw-rect" ref="drawRectBox" :class="{ 'no-event': disabled }" @mousemove="mouseMove" @mousedown="mouseDown" @mouseup="mouseUp">
-				<div v-if="boxVisible" :id="boxId" class="box" :style="{ width: boxW + 'px', height: boxH + 'px', left: boxT + 'px', width: boxL + 'px' }">
+			<div class="draw-rect" ref="drawRectBox" :class="{ 'no-event': disabled }" @mousemove="mouseMove"
+				@mousedown="mouseDown" @mouseup="mouseUp">
+				<div ref="box" v-if="boxVisible" :id="boxId" class="box"
+					:style="{ width: boxW + 'px', height: boxH + 'px', left: boxT + 'px', width: boxL + 'px' }">
 					<div id="upleftbtn" class="upleftbtn" @mousedown="onUpleftbtn"></div>
 					<div id="uprightbtn" class="uprightbtn" @mousedown="onUpRightbtn"></div>
 					<div id="downrightbtn" class="downrightbtn" @mousedown="onDownleftbtn"></div>
@@ -22,7 +24,6 @@
 </template>
 
 <script>
-
 	export default {
 		name: 'rectangleMarker',
 
@@ -36,7 +37,7 @@
 
 				// 鼠标事件属性
 				dragging: false,
-				
+
 				startX: undefined,
 				startY: undefined,
 
@@ -45,7 +46,7 @@
 
 				obj: null, //当前操作对象
 				box: null, //要处理的对象
-				
+
 				backImgRect: null,
 
 				boxId: '',
@@ -73,7 +74,7 @@
 
 			value: {
 				type: Array,
-				default: function() {
+				default: function () {
 					return []
 				}
 			}
@@ -81,7 +82,7 @@
 
 		created() {
 			// this.rectB
-			
+
 		},
 
 		mounted() {
@@ -95,17 +96,17 @@
 			onload() {
 				let rect = this.$refs.backImg.getBoundingClientRect()
 
-        this.backImgRect = {
-          height: rect.height,
-          width: rect.width
-        }
-        console.log("initConfig -> this.backImgRect", this.backImgRect)
+				this.backImgRect = {
+					height: rect.height,
+					width: rect.width
+				}
+				console.log("initConfig -> this.backImgRect", this.backImgRect)
 			},
 
 			mouseLeave() {
 				this.showBtns = false
 			},
-			
+
 			mark() {
 				this.markFlag = true
 			},
@@ -115,49 +116,49 @@
 			},
 
 			initData(data) {
-        // if (data) {
-        //   var changeBox = document.createElement("div");
-        //   changeBox.id = "changeBox";
-        //   changeBox.className = "box";
+				// if (data) {
+				//   var changeBox = document.createElement("div");
+				//   changeBox.id = "changeBox";
+				//   changeBox.className = "box";
 
-        //   changeBox.style.left = data[0][0] * that.backImgRect.width + 'px';
-        //   changeBox.style.top = data[0][1] * that.backImgRect.height + 'px';
+				//   changeBox.style.left = data[0][0] * that.backImgRect.width + 'px';
+				//   changeBox.style.top = data[0][1] * that.backImgRect.height + 'px';
 
-        //   changeBox.style.height = (data[3][1] - data[0][1]) * that.backImgRect.height + 'px'
-        //   changeBox.style.width = (data[1][0] - data[0][0]) * that.backImgRect.width + 'px'
+				//   changeBox.style.height = (data[3][1] - data[0][1]) * that.backImgRect.height + 'px'
+				//   changeBox.style.width = (data[1][0] - data[0][0]) * that.backImgRect.width + 'px'
 
 
-        //   drawRectBox.appendChild(changeBox);
+				//   drawRectBox.appendChild(changeBox);
 
-        //   // 四角初始化 放大矩形 事件
-        //   let upleftbtn = document.createElement('div')
-        //   upleftbtn.className = 'upleftbtn'
-        //   upleftbtn.id = 'upleftbtn'
+				//   // 四角初始化 放大矩形 事件
+				//   let upleftbtn = document.createElement('div')
+				//   upleftbtn.className = 'upleftbtn'
+				//   upleftbtn.id = 'upleftbtn'
 
-        //   let uprightbtn = document.createElement('div')
-        //   uprightbtn.className = 'uprightbtn'
-        //   uprightbtn.id = 'uprightbtn'
+				//   let uprightbtn = document.createElement('div')
+				//   uprightbtn.className = 'uprightbtn'
+				//   uprightbtn.id = 'uprightbtn'
 
-        //   let downleftbtn = document.createElement('div')
-        //   downleftbtn.className = 'downleftbtn'
-        //   downleftbtn.id = 'downleftbtn'
+				//   let downleftbtn = document.createElement('div')
+				//   downleftbtn.className = 'downleftbtn'
+				//   downleftbtn.id = 'downleftbtn'
 
-        //   let downrightbtn = document.createElement('div')
-        //   downrightbtn.className = 'downrightbtn'
-        //   downrightbtn.id = 'downrightbtn'
+				//   let downrightbtn = document.createElement('div')
+				//   downrightbtn.className = 'downrightbtn'
+				//   downrightbtn.id = 'downrightbtn'
 
-        //   changeBox.appendChild(upleftbtn)
-        //   changeBox.appendChild(uprightbtn)
-        //   changeBox.appendChild(downleftbtn)
-        //   changeBox.appendChild(downrightbtn)
+				//   changeBox.appendChild(upleftbtn)
+				//   changeBox.appendChild(uprightbtn)
+				//   changeBox.appendChild(downleftbtn)
+				//   changeBox.appendChild(downrightbtn)
 
-        //   document.getElementById("upleftbtn").onmousedown = onUpleftbtn;
-        //   document.getElementById("uprightbtn").onmousedown = onUpRightbtn;
-        //   document.getElementById("downleftbtn").onmousedown = onDownleftbtn;
-        //   document.getElementById("downrightbtn").onmousedown = onDownRightbtn;
+				//   document.getElementById("upleftbtn").onmousedown = onUpleftbtn;
+				//   document.getElementById("uprightbtn").onmousedown = onUpRightbtn;
+				//   document.getElementById("downleftbtn").onmousedown = onDownleftbtn;
+				//   document.getElementById("downrightbtn").onmousedown = onDownRightbtn;
 
-        //   changeBox = null
-        // }
+				//   changeBox = null
+				// }
 			},
 
 			mouseDown(e) {
@@ -165,8 +166,8 @@
 				// 	return
 				// }
 
-				const drawRectBox = this.$refs.drawRectBox
-			
+				// const drawRectBox = this.$refs.drawRectBox
+
 				this.startX = e.offsetX;
 				this.startY = e.offsetY;
 
@@ -182,7 +183,9 @@
 
 					// e.target.id = "movingBox";
 
-					this.boxId = 'movingBox'
+					if (this.boxId !== 'movingBox') {
+						this.boxId = 'movingBox'
+					}
 
 					// 计算坐标差值
 					this.diffX = this.startX
@@ -196,18 +199,19 @@
 					// let activeBox = document.createElement("div");
 					// activeBox.id = "activeBox";
 					// activeBox.className = "box";
-					
+
 					// activeBox.style.top = this.startY + 'px';
 					// activeBox.style.left = this.startX + 'px';
 					// drawRectBox.appendChild(activeBox);
 
 
+
+
+					this.boxId = 'activeBox'
+					this.boxT = this.startY
+					this.boxL = this.startX
+
 					this.boxVisible = true
-					this.$nextTick(() => {
-						this.boxId = 'activeBox'
-						this.boxT = this.startY
-						this.boxL = this.startX
-					})
 
 					// // 四角初始化 放大矩形 事件
 					// let upleftbtn = document.createElement('div')
@@ -254,73 +258,76 @@
 				// }
 
 				// 更新 box 尺寸
-          if (this.boxId === 'activeBox') {
-            // var ab = document.getElementById("activeBox");
-            // ab.style.width = e.offsetX - this.startX + 'px';
-						// ab.style.height = e.offsetY - this.startY + 'px';
-						
-						this.boxW = e.offsetX - this.startX
-						this.boxH = e.offsetY - this.startY
-          }
+				if (this.boxId === 'activeBox') {
+					// var ab = document.getElementById("activeBox");
+					// ab.style.width = e.offsetX - this.startX + 'px';
+					// ab.style.height = e.offsetY - this.startY + 'px';
 
-          // 移动，更新 box 坐标
-          if (this.boxId === 'movingBox' && this.dragging) {
-            // var mb = document.getElementById("movingBox");
+					this.boxW = e.offsetX - this.startX
+					this.boxH = e.offsetY - this.startY
+				}
 
-            let realTop = (e.offsetY + e.target.offsetTop - this.diffY )> 0 ? (e.offsetY + e.target.offsetTop - this.diffY ): 0
-            let realLeft = (e.offsetX + e.target.offsetLeft - this.diffX) > 0 ? (e.offsetX + e.target.offsetLeft - this.diffX) : 0
+				// 移动，更新 box 坐标
+				if (this.boxId === 'movingBox' && this.dragging) {
+					// var mb = document.getElementById("movingBox");
 
-            let maxTop = this.backImgRect.height - this.boxH
-            let maxLeft = this.backImgRect.width - this.boxW
+					let realTop = (e.offsetY + e.target.offsetTop - this.diffY) > 0 ? (e.offsetY + e.target.offsetTop -
+						this.diffY) : 0
+					let realLeft = (e.offsetX + e.target.offsetLeft - this.diffX) > 0 ? (e.offsetX + e.target.offsetLeft -
+						this.diffX) : 0
 
-            realTop = realTop >= maxTop ? maxTop : realTop
-            realLeft = realLeft >= maxLeft ? maxLeft : realLeft
+					let maxTop = this.backImgRect.height - this.boxH
+					let maxLeft = this.backImgRect.width - this.boxW
 
-            this.boxT = realTop + 'px';
-            this.boxL = realLeft + 'px';
-          }
+					realTop = realTop >= maxTop ? maxTop : realTop
+					realLeft = realLeft >= maxLeft ? maxLeft : realLeft
 
-          if (this.obj) {
-            e = e || window.event;
-            var location = {
-              x: e.x || e.offsetX,
-              y: e.y || e.offsetY
-            }
-            switch (this.obj.operateType) {
-              case "nw":
-                this.move('n', location, this.box);
-                this.move('w', location, this.box);
-                break;
-              case "ne":
-                this.move('n', location, this.box);
-                this.move('e', location, this.box);
-                break;
-              case "sw":
-                this.move('s', location, this.box);
-                this.move('w', location, this.box);
-                break;
-              case "se":
-                this.move('s', location, this.box);
-                this.move('e', location, this.box);
-                break;
-              case "move":
-                this.move('move', location, this.box);
-                break;
-            }
+					this.boxT = realTop + 'px';
+					this.boxL = realLeft + 'px';
+				}
 
-          }
+				if (this.obj) {
+					e = e || window.event;
+					var location = {
+						x: e.x || e.offsetX,
+						y: e.y || e.offsetY
+					}
+					switch (this.obj.operateType) {
+						case "nw":
+							this.move('n', location, this.$refs.box);
+							this.move('w', location, this.$refs.box);
+							break;
+						case "ne":
+							this.move('n', location, this.$refs.box);
+							this.move('e', location, this.$refs.box);
+							break;
+						case "sw":
+							this.move('s', location, this.$refs.box);
+							this.move('w', location, this.$refs.box);
+							break;
+						case "se":
+							this.move('s', location, this.$refs.box);
+							this.move('e', location, this.$refs.box);
+							break;
+						case "move":
+							this.move('move', location, this.box);
+							break;
+					}
+
+				}
 			},
 
 			mouseUp() {
+				return
 				console.log(this.boxId, 123123)
 				// if (!this.markFlag) {
 				// 	return
 				// }
 
-				const drawRectBox = this.$refs.drawRectBox
+				// const drawRectBox = this.$refs.drawRectBox
 				// 禁止拖动
 				this.dragging = false;
-				
+
 				if (this.boxId === 'activeBox') {
 					// var ab = document.getElementById("activeBox");
 
@@ -369,15 +376,23 @@
 			},
 
 			getHotData() {
-        let target = document.getElementById('changeBox')
-        console.log("getHotData -> target", target)
+				let target = document.getElementById('changeBox')
+				console.log("getHotData -> target", target)
+				let {
+					offsetTop,
+					offsetLeft
+				} = target
 
-        let { offsetTop, offsetLeft } = target
+				if (target) {
+					let {
+						width: WIDTH,
+						height: HEIGHT
+					} = this.backImgRect
 
-        if (target) {
-          let { width: WIDTH, height: HEIGHT } = this.backImgRect
-
-          let { width, height } = target.getBoundingClientRect()
+					let {
+						width,
+						height
+					} = target.getBoundingClientRect()
 
 					// 矩形区域 角点位置（百分比）
 					let data = [
@@ -388,23 +403,23 @@
 					]
 
 					// 矩形中点
-          let centerPoint = [
-            this.toFixed6(offsetLeft + 0.5 * width, WIDTH), 
-            this.toFixed6(offsetTop + 0.5 * height, HEIGHT)
-          ]
+					let centerPoint = [
+						this.toFixed6(offsetLeft + 0.5 * width, WIDTH),
+						this.toFixed6(offsetTop + 0.5 * height, HEIGHT)
+					]
 
-          let hotData = {
-            data,
-            centerPoint
-          }
+					let hotData = {
+						data,
+						centerPoint
+					}
 
-          console.log("getHotData -> hotData", hotData)
-        }
+					console.log("getHotData -> hotData", hotData)
+				}
 			},
-			
+
 			toFixed6(v1, v2) {
-        return (v1 / v2).toFixed(6)
-      },
+				return (v1 / v2).toFixed(6)
+			},
 
 			move(type, location, tarobj) {
 				switch (type) {
@@ -423,7 +438,7 @@
 
 						break;
 					}
-						
+
 					case 's': {
 						let add_length = this.clickY - location.y;
 						this.clickY = location.y;
@@ -437,7 +452,7 @@
 						break;
 					}
 
-						
+
 					case 'w': {
 						var add_length = this.clickX - location.x;
 						this.clickX = location.x;
@@ -454,7 +469,7 @@
 						break;
 					}
 
-						
+
 					case 'e': {
 						let add_length = this.clickX - location.x;
 						this.clickX = location.x;
@@ -492,7 +507,7 @@
 
 			onDragDown(e, type) {
 				e = e || window.event;
-				
+
 				this.clickX = e.x || e.offsetX;
 				this.clickY = e.y || e.offsetY;
 				this.obj = window;
@@ -515,6 +530,7 @@
 
 		.mark-wrap {
 			position: relative;
+
 			.img-responsive {
 				display: inline-block;
 				max-width: 100%;
@@ -536,7 +552,7 @@
 					pointer-events: none;
 				}
 
-				
+
 			}
 		}
 
@@ -561,13 +577,16 @@
 		.fade-enter-active {
 			animation: hide-and-show .5s;
 		}
+
 		.fade-leave-active {
 			animation: hide-and-show .5s reverse;
 		}
+
 		@keyframes hide-and-show {
 			0% {
 				opacity: 0;
 			}
+
 			100% {
 				opacity: 1;
 			}
@@ -576,53 +595,52 @@
 </style>
 
 <style lang="less">
-.rectangle-marker {
-	.box {
-		position: absolute;
-		width: 0px;
-		height: 0px;
-		opacity: 0.5;
-		z-index: 149;
-		cursor: move;
-		border: 1px solid #f00;
-
-		.upleftbtn,
-		.uprightbtn,
-		.downleftbtn,
-		.downrightbtn {
-			width: 10px;
-			height: 10px;
-			border: 1px solid steelblue;
+	.rectangle-marker {
+		.box {
 			position: absolute;
-			z-index: 5;
-			background: whitesmoke;
-			border-radius: 10px;
-		}
+			width: 0px;
+			height: 0px;
+			opacity: 0.5;
+			z-index: 149;
+			cursor: move;
+			border: 1px solid #f00;
 
-		.upleftbtn {
-			top: -5px;
-			left: -5px;
-			cursor: nw-resize;
-		}
+			.upleftbtn,
+			.uprightbtn,
+			.downleftbtn,
+			.downrightbtn {
+				width: 10px;
+				height: 10px;
+				border: 1px solid steelblue;
+				position: absolute;
+				z-index: 5;
+				background: whitesmoke;
+				border-radius: 10px;
+			}
 
-		.uprightbtn {
-			top: -5px;
-			right: -5px;
-			cursor: ne-resize;
-		}
+			.upleftbtn {
+				top: -5px;
+				left: -5px;
+				cursor: nw-resize;
+			}
 
-		.downleftbtn {
-			left: -5px;
-			bottom: -5px;
-			cursor: sw-resize;
-		}
+			.uprightbtn {
+				top: -5px;
+				right: -5px;
+				cursor: ne-resize;
+			}
 
-		.downrightbtn {
-			right: -5px;
-			bottom: -5px;
-			cursor: se-resize;
+			.downleftbtn {
+				left: -5px;
+				bottom: -5px;
+				cursor: sw-resize;
+			}
+
+			.downrightbtn {
+				right: -5px;
+				bottom: -5px;
+				cursor: se-resize;
+			}
 		}
 	}
-}
-	
 </style>
