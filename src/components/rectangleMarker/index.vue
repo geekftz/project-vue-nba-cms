@@ -2,13 +2,13 @@
 	<div class="rectangle-marker">
 		<div class="mark-wrap">
 			<img ref="backImg" :src="imgUrl" class="img-responsive" alt="响应式图像" @load="onload">
-			<div class="draw-rect" ref="drawRectBox" :class="{ 'no-event': disabled }" @mousemove="mouseMove"
+			<div class="draw-rect" :class="{ 'no-event': disabled }" @mousemove="mouseMove"
 				@mousedown="mouseDown" @mouseup="mouseUp">
 				<div ref="box" v-if="boxVisible" :id="boxId" class="box"
-					:style="{ width: boxW + 'px', height: boxH + 'px', left: boxT + 'px', width: boxL + 'px' }">
+					:style="{ width: boxW + 'px', height: boxH + 'px', left: boxL + 'px', top: boxT + 'px' }">
 					<div id="upleftbtn" class="upleftbtn" @mousedown="onUpleftbtn"></div>
 					<div id="uprightbtn" class="uprightbtn" @mousedown="onUpRightbtn"></div>
-					<div id="downrightbtn" class="downrightbtn" @mousedown="onDownleftbtn"></div>
+					<div id="downleftbtn" class="downleftbtn" @mousedown="onDownleftbtn"></div>
 					<div id="downrightbtn" class="downrightbtn" @mousedown="onDownRightbtn"></div>
 				</div>
 			</div>
@@ -112,61 +112,29 @@
 			},
 
 			reset() {
+				this.boxVisible = false
+				this.boxId = ''
 
+				this.boxH = 0
+				this.boxW = 0
+				this.boxL = 0
+				this.boxT = 0
 			},
 
 			initData(data) {
-				// if (data) {
-				//   var changeBox = document.createElement("div");
-				//   changeBox.id = "changeBox";
-				//   changeBox.className = "box";
+				// this.boxId = 'changeBox'
+				// this.boxL = data[0][0] * this.backImgRect.width
+				// this.boxT = data[0][1] * this.backImgRect.height
+				// this.boxW =  (data[3][1] - data[0][1]) * this.backImgRect.height
+				// this.boxH = (data[1][0] - data[0][0]) * this.backImgRect.width
 
-				//   changeBox.style.left = data[0][0] * that.backImgRect.width + 'px';
-				//   changeBox.style.top = data[0][1] * that.backImgRect.height + 'px';
-
-				//   changeBox.style.height = (data[3][1] - data[0][1]) * that.backImgRect.height + 'px'
-				//   changeBox.style.width = (data[1][0] - data[0][0]) * that.backImgRect.width + 'px'
-
-
-				//   drawRectBox.appendChild(changeBox);
-
-				//   // 四角初始化 放大矩形 事件
-				//   let upleftbtn = document.createElement('div')
-				//   upleftbtn.className = 'upleftbtn'
-				//   upleftbtn.id = 'upleftbtn'
-
-				//   let uprightbtn = document.createElement('div')
-				//   uprightbtn.className = 'uprightbtn'
-				//   uprightbtn.id = 'uprightbtn'
-
-				//   let downleftbtn = document.createElement('div')
-				//   downleftbtn.className = 'downleftbtn'
-				//   downleftbtn.id = 'downleftbtn'
-
-				//   let downrightbtn = document.createElement('div')
-				//   downrightbtn.className = 'downrightbtn'
-				//   downrightbtn.id = 'downrightbtn'
-
-				//   changeBox.appendChild(upleftbtn)
-				//   changeBox.appendChild(uprightbtn)
-				//   changeBox.appendChild(downleftbtn)
-				//   changeBox.appendChild(downrightbtn)
-
-				//   document.getElementById("upleftbtn").onmousedown = onUpleftbtn;
-				//   document.getElementById("uprightbtn").onmousedown = onUpRightbtn;
-				//   document.getElementById("downleftbtn").onmousedown = onDownleftbtn;
-				//   document.getElementById("downrightbtn").onmousedown = onDownRightbtn;
-
-				//   changeBox = null
-				// }
+				// this.boxVisible = true
 			},
 
 			mouseDown(e) {
-				// if (!this.markFlag) {
-				// 	return
-				// }
-
-				// const drawRectBox = this.$refs.drawRectBox
+				if (!this.markFlag && !this.boxVisible) {
+					return
+				}
 
 				this.startX = e.offsetX;
 				this.startY = e.offsetY;
@@ -177,12 +145,6 @@
 					this.dragging = true;
 
 					// 设置当前 box 的 id 为 movingBox
-					// if (document.getElementById("movingBox") !== null) {
-					// 	document.getElementById("movingBox").removeAttribute("id");
-					// }
-
-					// e.target.id = "movingBox";
-
 					if (this.boxId !== 'movingBox') {
 						this.boxId = 'movingBox'
 					}
@@ -191,99 +153,60 @@
 					this.diffX = this.startX
 					this.diffY = this.startY
 				} else {
+					console.log(445566);
 					if (this.boxId === 'changeBox') {
 						return
 					}
 
-					// 在页面创建 box
-					// let activeBox = document.createElement("div");
-					// activeBox.id = "activeBox";
-					// activeBox.className = "box";
-
-					// activeBox.style.top = this.startY + 'px';
-					// activeBox.style.left = this.startX + 'px';
-					// drawRectBox.appendChild(activeBox);
-
-
-
-
 					this.boxId = 'activeBox'
 					this.boxT = this.startY
 					this.boxL = this.startX
-
 					this.boxVisible = true
-
-					// // 四角初始化 放大矩形 事件
-					// let upleftbtn = document.createElement('div')
-					// upleftbtn.className = 'upleftbtn'
-					// upleftbtn.id = 'upleftbtn'
-
-					// let uprightbtn = document.createElement('div')
-					// uprightbtn.className = 'uprightbtn'
-					// uprightbtn.id = 'uprightbtn'
-
-					// let downleftbtn = document.createElement('div')
-					// downleftbtn.className = 'downleftbtn'
-					// downleftbtn.id = 'downleftbtn'
-
-					// let downrightbtn = document.createElement('div')
-					// downrightbtn.className = 'downrightbtn'
-					// downrightbtn.id = 'downrightbtn'
-
-					// activeBox.appendChild(upleftbtn)
-					// activeBox.appendChild(uprightbtn)
-					// activeBox.appendChild(downleftbtn)
-					// activeBox.appendChild(downrightbtn)
-
-					// document.getElementById("upleftbtn").onmousedown = this.onUpleftbtn;
-					// document.getElementById("uprightbtn").onmousedown = this.onUpRightbtn;
-					// document.getElementById("downleftbtn").onmousedown = this.onDownleftbtn;
-					// document.getElementById("downrightbtn").onmousedown = this.onDownRightbtn;
-
-					// 释放box资源
-					// activeBox = null;
 				}
 			},
 
 			mouseMove(e) {
-				// if (!this.markFlag) {
-				// 	let toRight = this.backImgRect.width - e.offsetX
-				// 	let toTop = e.offsetY
+				if (!this.markFlag && !this.boxVisible) {
+					let toRight = this.backImgRect.width - e.offsetX
+					let toTop = e.offsetY
 
-				// 	if (toRight <= 100 && toTop <= 40) {
-				// 		this.showBtns = true
-				// 	}
+					if (toRight <= 100 && toTop <= 40) {
+						this.showBtns = true
+					}
 
-				// 	return
-				// }
+					return
+				}
+
+let toRight = this.backImgRect.width - e.offsetX
+					let toTop = e.offsetY
+
+					if (toRight <= 100 && toTop <= 40) {
+						this.showBtns = true
+						return
+					}
 
 				// 更新 box 尺寸
 				if (this.boxId === 'activeBox') {
-					// var ab = document.getElementById("activeBox");
-					// ab.style.width = e.offsetX - this.startX + 'px';
-					// ab.style.height = e.offsetY - this.startY + 'px';
-
 					this.boxW = e.offsetX - this.startX
 					this.boxH = e.offsetY - this.startY
 				}
 
 				// 移动，更新 box 坐标
 				if (this.boxId === 'movingBox' && this.dragging) {
-					// var mb = document.getElementById("movingBox");
 
 					let realTop = (e.offsetY + e.target.offsetTop - this.diffY) > 0 ? (e.offsetY + e.target.offsetTop -
 						this.diffY) : 0
 					let realLeft = (e.offsetX + e.target.offsetLeft - this.diffX) > 0 ? (e.offsetX + e.target.offsetLeft -
 						this.diffX) : 0
 
-					let maxTop = this.backImgRect.height - this.boxH
-					let maxLeft = this.backImgRect.width - this.boxW
+					let maxTop = this.backImgRect.height - this.$refs.box.offsetHeight
+					let maxLeft = this.backImgRect.width - this.$refs.box.offsetWidth
 
 					realTop = realTop >= maxTop ? maxTop : realTop
 					realLeft = realLeft >= maxLeft ? maxLeft : realLeft
 
-					this.boxT = realTop + 'px';
-					this.boxL = realLeft + 'px';
+					this.boxT = realTop;
+					this.boxL = realLeft;
 				}
 
 				if (this.obj) {
@@ -318,72 +241,56 @@
 			},
 
 			mouseUp() {
-				return
-				console.log(this.boxId, 123123)
-				// if (!this.markFlag) {
-				// 	return
-				// }
+				if (!this.markFlag && !this.boxVisible) {
+					return
+				}
 
-				// const drawRectBox = this.$refs.drawRectBox
 				// 禁止拖动
 				this.dragging = false;
 
 				if (this.boxId === 'activeBox') {
-					// var ab = document.getElementById("activeBox");
-
-					// if (ab) {
-					// 	ab.removeAttribute("id");
-					// 	ab.id = 'changeBox'
-					// 	// 如果长宽均小于 3px，移除 box
-					// 	if (ab.offsetWidth < 3 || ab.offsetHeight < 3) {
-					// 		drawRectBox.removeChild(ab)
-					// 	}
-					// }
-
 					if (this.$refs.box) {
 						this.boxId = 'changeBox'
 
 						if (this.$refs.box.offsetWidth < 3 || this.$refs.box.offsetHeight < 3) {
 							this.boxVisible = false
+							this.boxId = ''
 						}
 					}
 				} else {
-					// var cd = document.getElementById("movingBox");
-
-					// if (cd) {
-					// 	cd.removeAttribute("id");
-					// 	cd.id = 'changeBox'
-					// 	// 如果长宽均小于 3px，移除 box
-					// 	if (cd.offsetWidth < 3 || cd.offsetHeight < 3) {
-					// 		drawRectBox.removeChild(cd)
-					// 	}
-					// }
-
 					if (this.$refs.box && this.boxId === 'movingBox') {
-						console.log(334455)
 						this.boxId = 'changeBox'
 
 						if (this.$refs.box.offsetWidth < 3 || this.$refs.box.offsetHeight < 3) {
 							this.boxVisible = false
+							this.boxId = ''
 						}
 					}
 				}
 
-				this.getHotData()
+				if (this.boxVisible) {
+					this.getHotData()
+	
+					document.body.style.cursor = "auto";
+					this.obj = null;
+					this.markFlag = false
+				} else {
+					this.markFlag = true
+				}
 
-				document.body.style.cursor = "auto";
-				this.obj = null;
+				// this.markFlag = false
+
 			},
 
 			getHotData() {
-				let target = document.getElementById('changeBox')
-				console.log("getHotData -> target", target)
-				let {
-					offsetTop,
-					offsetLeft
-				} = target
+				let target = this.$refs.box
 
 				if (target) {
+					let {
+						offsetTop,
+						offsetLeft
+					} = target
+
 					let {
 						width: WIDTH,
 						height: HEIGHT
